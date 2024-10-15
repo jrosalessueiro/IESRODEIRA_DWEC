@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Pirámide</title>
+</head>
+<body>
+
+<script>
+    // Función para validar si el número está entre 1 y 100
+    function solicitarNumero() {
+        let numero;
+        do {
+            numero = prompt("Introduce un número entre 1 y 100:");
+            numero = parseInt(numero);
+        } while (isNaN(numero) || numero < 1 || numero > 100); 
+        return numero;
+    }
+
+    // Función para generar y mostrar la pirámide
+    function generarPiramide(numero) {
+        for (let i = 1; i <= numero; i++) {
+            // Crear una cadena con los números desde 1 hasta 'i'
+            let fila = '';
+            for (let j = 1; j <= i; j++) {
+                fila += j + ' ';
+            }
+            // Escribir la fila en el documento
+            document.write(fila + '<br>');
+        }
+    }
+
+    // Solicitar número al usuario
+    const numero = solicitarNumero();
+
+    // Generar la pirámide
+    generarPiramide(numero);
+
+</script>
+
+</body>
+</html>
