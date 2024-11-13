@@ -4,15 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Número de cifras</title>
+    <title>Tarefa UD03 DWEC</title>
 </head>
 
 <body>
     <div id="container">
     </div>
     <script>
-        let output = document.getElemetById("container");
-        let window = window.open("", "_blank");
+        let output = document.getElementById("container");
+        let ventana = window.open("", "_blank", "height=500, width=500, top=200, left=900, resizable=no");
+        if (ventana) {
+            funcionVentana();
+        } else {
+            output.innerHTML = "La ventana emergente fue bloqueada por el navegador.";
+        }
+
+
+
+        function funcionVentana() {
+            ventana.document.write("<h3>Ejemplo de Ventana Nueva</h3><br>" + "URL: " + ventana.location.href + "<br>"
+                + "Protocolo utilizado: " + ventana.location.protocol + "<br>" + "Nombre en código del navegador: "
+                + ventana.navigator.appCodeName + "<br>");
+
+            if (ventana.navigator.javaEnabled) {
+                ventana.document.write("Java SI disponible en esta ventana");
+            } else {
+                ventana.document.write("Java NO disponible en esta ventana");
+
+            }
+            let iframe = document.createElement('iframe');
+            iframe.src = "https://www.google.es";
+            iframe.width = "800";
+            iframe.height = "600";
+            document.getElementById('container').appendChild(iframe);
+        }
     </script>
 
 
