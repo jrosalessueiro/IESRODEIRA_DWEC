@@ -15,45 +15,10 @@
         // Selecciona el elemento con el id "container" y lo almacena en la variable output
         let output = document.getElementById("container");
 
-        // Abre una nueva ventana con las dimensiones y posición especificadas
-        // Se guarda la referencia a la ventana en la variable ventana
-        let ventana = window.open("", "_blank", "height=500, width=500, top=200, left=900, resizable=no");
-
-        // Comprueba si la ventana se abrió correctamente
-        if (ventana) {
-            // Si la ventana fue abierta con éxito, llama a la función funcionVentana
-            funcionVentana();
-        } else {
-            // Si la ventana fue bloqueada, muestra un mensaje en el contenedor
-            output.innerHTML = "La ventana emergente fue bloqueada por el navegador.";
-        }
-
-        // Definición de la función funcionVentana para trabajar con la nueva ventana
-        function funcionVentana() {
-            // Escribe en la nueva ventana información básica: título, URL, protocolo y nombre en código del navegador
-            ventana.document.write("<h3>Ejemplo de Ventana Nueva</h3><br>" +
-                "URL: " + ventana.location.href + "<br>" +
-                "Protocolo utilizado: " + ventana.location.protocol + "<br>" +
-                "Nombre en código del navegador: " + ventana.navigator.appCodeName + "<br>");
-
-            // Comprueba si Java está habilitado en el navegador y muestra el resultado
-            if (ventana.navigator.javaEnabled) {
-                ventana.document.write("Java SI disponible en esta ventana");
-            } else {
-                ventana.document.write("Java NO disponible en esta ventana");
-            }
-
-            // Crea un elemento iframe que cargará la página de Google en el contenedor principal
-            let iframe = document.createElement('iframe');
-            iframe.src = "https://www.google.es";
-            iframe.width = "800"; // Ancho del iframe en píxeles
-            iframe.height = "600"; // Altura del iframe en píxeles
-
-            // Añade el iframe al div con id "container" en el documento actual
-            document.getElementById('container').appendChild(iframe);
-        }
-
+        // Muestra un título inicial en el contenedor
         output.innerHTML = "<h1>TAREA DWEC03</h1>";
+
+        // Solicita al usuario su nombre completo y fecha de nacimiento
         let nombre = prompt("Introduzca su nombre y apellidos:");
         let dia = parseInt(prompt("Introduzca el DIA de su nacimiento:"));
         let mes = prompt("Introduzca el MES de su nacimiento:");
@@ -61,16 +26,22 @@
         let meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
         let mesNumero = 0;
 
+        // Busca el mes en el array meses y obtiene su número correspondiente
         for (let h = 0; h < meses.length; h++) {
             if (mes == meses[h]) {
                 mesNumero = h + 1;
             }
         }
+
+        // Inicializa un array vacío y una variable de opción para futuros cálculos con el nombre
         let nombreArray = new Array(0);
         let opcion = false;
 
+        // Saluda al usuario y muestra la longitud de su nombre
         output.innerHTML += "Buenos días " + nombre + "<br>";
         output.innerHTML += "Tu nombre tiene " + nombre.length + " caracteres incluídos espacios." + "<br>";
+
+        // Encuentra la posición de la primera "A" (o "a", incluyendo tildadas) en el nombre
         for (let i = 0; i < nombre.length; i++) {
             if (nombre.charAt(i) == "a" || nombre.charAt(i) == "A" || nombre.charAt(i) == "á" || nombre.charAt(i) == "Á") {
                 let primera = i + 1;
@@ -79,6 +50,8 @@
                 break;
             }
         }
+
+        // Encuentra la posición de la última "A" (o "a", incluyendo tildadas) en el nombre
         for (let j = nombre.length - 1; j > -1; j--) {
             if (nombre.charAt(j) == "a" || nombre.charAt(j) == "A" || nombre.charAt(j) == "á" || nombre.charAt(j) == "Á") {
                 let ultima = j + 1;
@@ -86,10 +59,13 @@
                 break;
             }
         }
+
+        // Informa si el nombre no contiene letras "A" o "a"
         if (opcion == false) {
             output.innerHTML += "Tu nombre no tiene Aes." + "<br>";
         }
 
+        // Si el nombre tiene más de 3 letras, muestra el nombre sin las tres primeras letras
         if (nombre.length > 3) {
             for (let k = 3; k < nombre.length; k++) {
                 nombreArray.push(nombre.charAt(k));
@@ -99,9 +75,11 @@
             output.innerHTML += "Tu nombre menos las tres primeras no es nada." + "<br>";
         }
 
+        // Muestra el nombre del usuario en mayúsculas
         output.innerHTML += "Tu nombre todo en mayúsculas es: " + nombre.toUpperCase() + "<br>";
 
-        function edad(dia, mes, ano) {
+        // Función que calcula la edad del usuario en base a su fecha de nacimiento
+        function edad(day, month, year) {
             let hoy = new Date();
             let edad = 0;
             let diferenciaAnos = ano - hoy.getFullYear();
@@ -126,13 +104,17 @@
             return edad;
         }
 
+        // Muestra la edad calculada y la fecha de nacimiento del usuario
         output.innerHTML += "Tu edad es: " + edad(dia, mesNumero, ano) + "<br>";
         output.innerHTML += "Naciste un feliz " + dia + " de " + mes + " del año " + ano + "<br>";
 
+        // Muestra el coseno de 180 grados
         output.innerHTML += "El coseno de 180 es: " + Math.cos(180) + "<br>";
 
+        // Array con algunos números
         let a = [34, 67, 23, 75, 35, 19];
 
+        // Función que encuentra el mayor número en el array
         function mayor(a) {
             let num = a[0];
             for (let l = 1; l < a.length; l++) {
@@ -142,9 +124,63 @@
             }
             return num;
         }
+
+        // Muestra el número mayor del array
         output.innerHTML += "El número mayor de (34,67,23,75,35,19) es: " + mayor(a) + "<br>";
 
+        // Muestra un número al azar generado por Math.random()
         output.innerHTML += "Ejemplo de número al azar es: " + Math.random();
+
+        // Abre una nueva ventana con las dimensiones y posición especificadas
+        // Se guarda la referencia a la ventana en la variable ventana
+        let ventana = window.open("", "_blank", "height=500, width=500, top=200, left=900, resizable=no");
+
+        // Comprueba si la ventana se abrió correctamente
+        if (ventana) {
+            // Si la ventana fue abierta con éxito, llama a la función funcionVentana
+            funcionVentana();
+        } else {
+            // Si la ventana fue bloqueada, muestra un mensaje en el contenedor
+            output.innerHTML = "La ventana emergente fue bloqueada por el navegador.";
+        }
+
+        // Definición de la función funcionVentana para trabajar con la nueva ventana
+        function funcionVentana() {
+            // Escribe en la nueva ventana información básica: título, URL, protocolo y nombre en código del navegador
+            let heading = ventana.document.createElement('h3');
+            heading.textContent = "Ejemplo de Ventana Nueva";
+            ventana.document.body.appendChild(heading);
+
+            let paragraph1 = ventana.document.createElement('p');
+            paragraph1.textContent = "URL: " + ventana.location.href;
+            ventana.document.body.appendChild(paragraph1);
+
+            let paragraph2 = ventana.document.createElement('p');
+            paragraph2.textContent = "Protocolo utilizado: " + ventana.location.protocol;
+            ventana.document.body.appendChild(paragraph2);
+
+            let paragraph3 = ventana.document.createElement('p');
+            paragraph3.textContent = "Nombre en código del navegador: " + ventana.navigator.appCodeName;
+            ventana.document.body.appendChild(paragraph3);
+
+            // Comprueba si Java está habilitado en el navegador y muestra el resultado
+            let javaMessage = ventana.document.createElement('p');
+            if (ventana.navigator.javaEnabled()) {
+                javaMessage.textContent = "Java SI disponible en esta ventana";
+            } else {
+                javaMessage.textContent = "Java NO disponible en esta ventana";
+            }
+            ventana.document.body.appendChild(javaMessage);
+
+            // Crea un elemento iframe que cargará la página de Google en el contenedor principal
+            let iframe = document.createElement('iframe');
+            iframe.src = "https://www.google.com";
+            iframe.width = "800"; // Ancho del iframe en píxeles
+            iframe.height = "600"; // Altura del iframe en píxeles
+
+            // Añade el iframe al div con id "container" en el documento actual
+            output.appendChild(iframe);
+        }
     </script>
 </body>
 
