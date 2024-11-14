@@ -8,39 +8,144 @@
 </head>
 
 <body>
+    <!-- Contenedor principal donde se mostrará el iframe si la ventana es bloqueada -->
     <div id="container">
     </div>
     <script>
+        // Selecciona el elemento con el id "container" y lo almacena en la variable output
         let output = document.getElementById("container");
+
+        // Abre una nueva ventana con las dimensiones y posición especificadas
+        // Se guarda la referencia a la ventana en la variable ventana
         let ventana = window.open("", "_blank", "height=500, width=500, top=200, left=900, resizable=no");
+
+        // Comprueba si la ventana se abrió correctamente
         if (ventana) {
+            // Si la ventana fue abierta con éxito, llama a la función funcionVentana
             funcionVentana();
         } else {
+            // Si la ventana fue bloqueada, muestra un mensaje en el contenedor
             output.innerHTML = "La ventana emergente fue bloqueada por el navegador.";
         }
 
-
-
+        // Definición de la función funcionVentana para trabajar con la nueva ventana
         function funcionVentana() {
-            ventana.document.write("<h3>Ejemplo de Ventana Nueva</h3><br>" + "URL: " + ventana.location.href + "<br>"
-                + "Protocolo utilizado: " + ventana.location.protocol + "<br>" + "Nombre en código del navegador: "
-                + ventana.navigator.appCodeName + "<br>");
+            // Escribe en la nueva ventana información básica: título, URL, protocolo y nombre en código del navegador
+            ventana.document.write("<h3>Ejemplo de Ventana Nueva</h3><br>" +
+                "URL: " + ventana.location.href + "<br>" +
+                "Protocolo utilizado: " + ventana.location.protocol + "<br>" +
+                "Nombre en código del navegador: " + ventana.navigator.appCodeName + "<br>");
 
+            // Comprueba si Java está habilitado en el navegador y muestra el resultado
             if (ventana.navigator.javaEnabled) {
                 ventana.document.write("Java SI disponible en esta ventana");
             } else {
                 ventana.document.write("Java NO disponible en esta ventana");
-
             }
+
+            // Crea un elemento iframe que cargará la página de Google en el contenedor principal
             let iframe = document.createElement('iframe');
             iframe.src = "https://www.google.es";
-            iframe.width = "800";
-            iframe.height = "600";
+            iframe.width = "800"; // Ancho del iframe en píxeles
+            iframe.height = "600"; // Altura del iframe en píxeles
+
+            // Añade el iframe al div con id "container" en el documento actual
             document.getElementById('container').appendChild(iframe);
         }
+
+        output.innerHTML = "<h1>TAREA DWEC03</h1>";
+        let nombre = prompt("Introduzca su nombre y apellidos:");
+        let dia = parseInt(prompt("Introduzca el DIA de su nacimiento:"));
+        let mes = prompt("Introduzca el MES de su nacimiento:");
+        let ano = parseInt(prompt("Introduzca el AÑO de su nacimiento:"));
+        let meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+        let mesNumero = 0;
+
+        for (let h = 0; h < meses.length; h++) {
+            if (mes == meses[h]) {
+                mesNumero = h + 1;
+            }
+        }
+        let nombreArray = new Array(0);
+        let opcion = false;
+
+        output.innerHTML += "Buenos días " + nombre + "<br>";
+        output.innerHTML += "Tu nombre tiene " + nombre.length + " caracteres incluídos espacios." + "<br>";
+        for (let i = 0; i < nombre.length; i++) {
+            if (nombre.charAt(i) == "a" || nombre.charAt(i) == "A" || nombre.charAt(i) == "á" || nombre.charAt(i) == "Á") {
+                let primera = i + 1;
+                output.innerHTML += "La primera letra A de tu nombre esta en la posición: " + primera + "<br>";
+                opcion = true;
+                break;
+            }
+        }
+        for (let j = nombre.length - 1; j > -1; j--) {
+            if (nombre.charAt(j) == "a" || nombre.charAt(j) == "A" || nombre.charAt(j) == "á" || nombre.charAt(j) == "Á") {
+                let ultima = j + 1;
+                output.innerHTML += "La última letra A de tu nombre esta en la posición: " + ultima + "<br>";
+                break;
+            }
+        }
+        if (opcion == false) {
+            output.innerHTML += "Tu nombre no tiene Aes." + "<br>";
+        }
+
+        if (nombre.length > 3) {
+            for (let k = 3; k < nombre.length; k++) {
+                nombreArray.push(nombre.charAt(k));
+            }
+            output.innerHTML += "Tu nombre menos las tres primeras letras es: " + nombreArray.join('') + "<br>";
+        } else {
+            output.innerHTML += "Tu nombre menos las tres primeras no es nada." + "<br>";
+        }
+
+        output.innerHTML += "Tu nombre todo en mayúsculas es: " + nombre.toUpperCase() + "<br>";
+
+        function edad(dia, mes, ano) {
+            let hoy = new Date();
+            let edad = 0;
+            let diferenciaAnos = ano - hoy.getFullYear();
+            let diferenciaMeses = mesNumero - hoy.getMonth();
+            let diferenciaDias = dia - hoy.getDate();
+
+            if (diferenciaAnos < 0) {
+                if (diferenciaMeses < 0) {
+                    edad = -diferenciaAnos;
+                } else if (diferenciaMeses > 0) {
+                    edad = -diferenciaAnos + 1;
+                } else {
+                    if (diferenciaDias < 0) {
+                        edad = -diferenciaAnos;
+                    } else {
+                        edad = -diferenciaAnos + 1;
+                    }
+                }
+            } else {
+                edad = 0;
+            }
+            return edad;
+        }
+
+        output.innerHTML += "Tu edad es: " + edad(dia, mesNumero, ano) + "<br>";
+        output.innerHTML += "Naciste un feliz " + dia + " de " + mes + " del año " + ano + "<br>";
+
+        output.innerHTML += "El coseno de 180 es: " + Math.cos(180) + "<br>";
+
+        let a = [34, 67, 23, 75, 35, 19];
+
+        function mayor(a) {
+            let num = a[0];
+            for (let l = 1; l < a.length; l++) {
+                if (a[l] > num) {
+                    num = a[l];
+                }
+            }
+            return num;
+        }
+        output.innerHTML += "El número mayor de (34,67,23,75,35,19) es: " + mayor(a) + "<br>";
+
+        output.innerHTML += "Ejemplo de número al azar es: " + Math.random();
     </script>
-
-
 </body>
 
 </html>
